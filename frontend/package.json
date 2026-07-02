@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@packages/definitions": "workspace:*",
     "@packages/logger": "workspace:*",
     "@tailwindcss/cli": "^4.3.2",
     "@tailwindcss/postcss": "^4.3.2",

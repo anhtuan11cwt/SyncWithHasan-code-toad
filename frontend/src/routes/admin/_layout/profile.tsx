@@ -1,3 +1,4 @@
+import { MIN_USERNAME_LENGTH } from "@packages/definitions";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/_layout/profile")({
@@ -11,7 +12,8 @@ function AdminProfile() {
         Hồ sơ quản trị viên
       </h1>
       <p className="mt-2 text-gray-500 dark:text-gray-400">
-        Quản lý thông tin cá nhân và cài đặt tài khoản.
+        Quản lý thông tin cá nhân và cài đặt tài khoản. (tối thiểu{" "}
+        {MIN_USERNAME_LENGTH} ký tự)
       </p>
     </div>
   );

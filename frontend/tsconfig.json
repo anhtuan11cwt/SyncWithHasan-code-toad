@@ -14,6 +14,7 @@
     "noUnusedParameters": true,
     "paths": {
       "@/*": ["./src/*"],
+      "@packages/definitions": ["../packages/definitions/src/index.ts"],
       "#/*": ["./src/*"]
     },
 
@@ -24,5 +25,5 @@
     "types": ["vite/client"],
     "verbatimModuleSyntax": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "../packages/definitions/src"]
 }
