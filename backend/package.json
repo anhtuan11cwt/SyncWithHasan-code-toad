@@ -1,0 +1,40 @@
+{
+  "author": "",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "description": "",
+  "devDependencies": {
+    "@biomejs/biome": "2.4.16",
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.0",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
+    "jiti": "^2.7.0",
+    "tsc-watch": "^7.2.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.1"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "dist/index.js",
+  "name": "@code-toad/backend",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "check": "biome check --write",
+    "check2": "biome check --write --unsafe",
+    "ci": "biome ci",
+    "dev": "tsc-watch --onSuccess \"node --import dotenv/config dist/index.js\"",
+    "format": "biome format --write",
+    "lint": "eslint",
+    "lint2": "biome lint --write",
+    "predev": "npx kill-port 5000",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
