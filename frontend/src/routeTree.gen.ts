@@ -9,50 +9,97 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as websiteLayoutRouteImport } from './routes/(website)/_layout'
+import { Route as websiteLayoutIndexRouteImport } from './routes/(website)/_layout/index'
+import { Route as websiteLayoutauthSigninRouteImport } from './routes/(website)/_layout/(auth)/signin'
 
-const IndexRoute = IndexRouteImport.update({
+const websiteLayoutRoute = websiteLayoutRouteImport.update({
+  id: '/(website)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const websiteLayoutIndexRoute = websiteLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => websiteLayoutRoute,
+} as any)
+const websiteLayoutauthSigninRoute = websiteLayoutauthSigninRouteImport.update({
+  id: '/(auth)/signin',
+  path: '/signin',
+  getParentRoute: () => websiteLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof websiteLayoutIndexRoute
+  '/signin': typeof websiteLayoutauthSigninRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof websiteLayoutIndexRoute
+  '/signin': typeof websiteLayoutauthSigninRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(website)/_layout': typeof websiteLayoutRouteWithChildren
+  '/(website)/_layout/': typeof websiteLayoutIndexRoute
+  '/(website)/_layout/(auth)/signin': typeof websiteLayoutauthSigninRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/signin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/signin'
+  id:
+    | '__root__'
+    | '/(website)/_layout'
+    | '/(website)/_layout/'
+    | '/(website)/_layout/(auth)/signin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  websiteLayoutRoute: typeof websiteLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(website)/_layout': {
+      id: '/(website)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof websiteLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(website)/_layout/': {
+      id: '/(website)/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof websiteLayoutIndexRouteImport
+      parentRoute: typeof websiteLayoutRoute
+    }
+    '/(website)/_layout/(auth)/signin': {
+      id: '/(website)/_layout/(auth)/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof websiteLayoutauthSigninRouteImport
+      parentRoute: typeof websiteLayoutRoute
     }
   }
 }
 
+interface websiteLayoutRouteChildren {
+  websiteLayoutIndexRoute: typeof websiteLayoutIndexRoute
+  websiteLayoutauthSigninRoute: typeof websiteLayoutauthSigninRoute
+}
+
+const websiteLayoutRouteChildren: websiteLayoutRouteChildren = {
+  websiteLayoutIndexRoute: websiteLayoutIndexRoute,
+  websiteLayoutauthSigninRoute: websiteLayoutauthSigninRoute,
+}
+
+const websiteLayoutRouteWithChildren = websiteLayoutRoute._addFileChildren(
+  websiteLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  websiteLayoutRoute: websiteLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

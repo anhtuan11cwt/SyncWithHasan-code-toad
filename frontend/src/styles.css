@@ -1,17 +1,13 @@
-
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Hide scrollbar but keep scroll functionality */
+*::-webkit-scrollbar {
+  display: none;
+}
+
 * {
-  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-html,
-body,
-#app {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-}
-

@@ -1,31 +1,22 @@
 {
-  "name": "frontend",
-  "private": true,
-  "type": "module",
-  "imports": {
-    "#/*": "./src/*"
-  },
-  "scripts": {
-    "predev": "npx kill-port 5173",
-    "dev": "vite dev",
-    "generate-routes": "tsr generate",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest run"
-  },
   "dependencies": {
     "@packages/logger": "workspace:*",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/cli": "^4.3.2",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/vite": "^4.3.2",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "@tanstack/router-plugin": "^1.132.0",
     "lucide-react": "^0.545.0",
+    "postcss": "^8.5.16",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.16",
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/router-cli": "^1.132.0",
@@ -36,15 +27,39 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.6.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.7.0",
     "jsdom": "^28.1.0",
     "typescript": "^6.0.2",
+    "typescript-eslint": "^8.62.1",
     "vite": "^8.0.0",
     "vitest": "^4.1.5"
   },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "name": "frontend",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
       "lightningcss"
     ]
-  }
+  },
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "check": "biome check --write",
+    "check2": "biome check --write --unsafe",
+    "ci": "biome ci",
+    "dev": "vite dev",
+    "format": "biome format --write",
+    "generate-routes": "tsr generate",
+    "lint": "eslint",
+    "lint2": "biome lint --write",
+    "predev": "npx kill-port 5173",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "type": "module"
 }

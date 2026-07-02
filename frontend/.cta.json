@@ -1,17 +1,17 @@
 {
-  "projectName": "frontend",
-  "mode": "file-router",
-  "typescript": true,
-  "tailwind": true,
-  "packageManager": "npm",
+  "addOnOptions": {},
+  "chosenAddOns": [],
+  "envVarValues": {},
+  "framework": "react",
   "git": true,
+  "includeExamples": false,
   "install": true,
   "intent": true,
-  "addOnOptions": {},
-  "includeExamples": false,
-  "envVarValues": {},
+  "mode": "file-router",
+  "packageManager": "npm",
+  "projectName": "frontend",
   "routerOnly": true,
-  "version": 1,
-  "framework": "react",
-  "chosenAddOns": []
+  "tailwind": true,
+  "typescript": true,
+  "version": 1
 }
