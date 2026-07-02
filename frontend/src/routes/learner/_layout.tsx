@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import {
   BookOpen,
   CreditCard,
@@ -10,6 +10,11 @@ import {
 import { Sidebar } from "../../components/common/layout/sidebar";
 
 export const Route = createFileRoute("/learner/_layout")({
+  beforeLoad: ({ location }) => {
+    if (location.pathname === "/learner") {
+      throw redirect({ to: "/learner/profile" });
+    }
+  },
   component: LearnerLayout,
 });
 

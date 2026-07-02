@@ -1,6 +1,7 @@
 import { Logger } from "@packages/logger";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 import { routeTree } from "./routeTree.gen";
 
 Logger.info("Ứng dụng Frontend đang khởi tạo");
@@ -21,5 +22,15 @@ const rootElement = document.getElementById("app");
 
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
-  root.render(<RouterProvider router={router} />);
+  root.render(
+    <>
+      <RouterProvider router={router} />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 2000,
+        }}
+      />
+    </>,
+  );
 }

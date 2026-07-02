@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import {
   BookOpen,
   LayoutDashboard,
@@ -10,6 +10,11 @@ import {
 import { Sidebar } from "../../components/common/layout/sidebar";
 
 export const Route = createFileRoute("/admin/_layout")({
+  beforeLoad: ({ location }) => {
+    if (location.pathname === "/admin") {
+      throw redirect({ to: "/admin/profile" });
+    }
+  },
   component: AdminLayout,
 });
 

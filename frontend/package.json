@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
     "@packages/definitions": "workspace:*",
     "@packages/logger": "workspace:*",
     "@tailwindcss/cli": "^4.3.2",
@@ -14,6 +15,8 @@
     "postcss": "^8.5.16",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-hook-form": "^7.80.0",
+    "react-hot-toast": "^2.6.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2"
   },
