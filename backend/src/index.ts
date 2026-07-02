@@ -1,9 +1,16 @@
+import "reflect-metadata";
 import { Logger } from "@packages/logger";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import express, {
   type Application,
   type Request,
   type Response,
 } from "express";
+import morgan from "morgan";
+import { corsOptions } from "./config/cors.js";
+import { connectDatabase } from "./config/data-source.js";
+import { redisClient } from "./config/redis-client.js";
 
 class Server {
   private app: Application;
@@ -18,8 +25,11 @@ class Server {
   }
 
   private config(): void {
+    this.app.use(morgan("tiny"));
+    this.app.use(cors(corsOptions));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
     Logger.info("Middleware đã được cấu hình");
   }
 
@@ -42,5 +52,20 @@ class Server {
   }
 }
 
-const server = new Server();
-server.start();
+async function bootstrap(): Promise<void> {
+  try {
+    await connectDatabase();
+    await redisClient.connect().catch(() => {
+      Logger.warning("Redis không khả dụng, tiếp tục không có cache");
+    });
+
+    const server = new Server();
+    server.start();
+  } catch (error) {
+    Logger.error("Khởi động server thất bại");
+    Logger.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
+}
+
+bootstrap();
