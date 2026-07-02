@@ -1,6 +1,9 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
+import { Logger } from '@packages/logger'
+
+Logger.info('Ứng dụng Frontend đang khởi tạo')
 
 const router = createRouter({
   routeTree,

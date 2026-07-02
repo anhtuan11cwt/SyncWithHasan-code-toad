@@ -1,3 +1,4 @@
+import { Logger } from "@packages/logger";
 import express, {
   type Application,
   type Request,
@@ -19,10 +20,12 @@ class Server {
   private config(): void {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    Logger.info("Middleware đã được cấu hình");
   }
 
   private routes(): void {
     this.app.get("/", (_req: Request, res: Response) => {
+      Logger.debug("Yêu cầu đến route gốc");
       res.status(200).json({
         message: "REST xin chào thế giới",
         success: true,
@@ -33,8 +36,8 @@ class Server {
 
   public start(): void {
     this.app.listen(this.port, () => {
-      console.log(`Server đang chạy tại http://localhost:${this.port}`);
-      console.log(`Môi trường: ${process.env.NODE_ENV || "development"}`);
+      Logger.success(`Server đang chạy tại http://localhost:${this.port}`);
+      Logger.info(`Môi trường: ${process.env.NODE_ENV || "development"}`);
     });
   }
 }

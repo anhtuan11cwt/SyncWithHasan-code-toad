@@ -14,6 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@packages/logger": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-router": "latest",
